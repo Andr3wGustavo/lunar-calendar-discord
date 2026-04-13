@@ -51,6 +51,26 @@ class LunarCalculator:
             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
         ]
 
+    def _is_retrograde(self, planet, date_obj):
+        p1 = planet
+        p2 = type(planet)()  # Create a fresh copy
+        
+        # Current position
+        p1.compute(ephem.date(date_obj))
+        lon1 = ephem.Ecliptic(p1).lon
+        
+        # Future position (0.1 days ahead)
+        future_date = ephem.Date(ephem.date(date_obj) + 0.1)
+        p2.compute(future_date)
+        lon2 = ephem.Ecliptic(p2).lon
+        
+        # Difference in degrees
+        diff = math.degrees(lon2 - lon1)
+        if diff < -180: diff += 360
+        elif diff > 180: diff -= 360
+        
+        return diff < 0  # Retrograde if apparent motion is backwards
+
     def get_lunar_data(self, date=None):
         if date is None:
             date = datetime.now(timezone.utc)
@@ -60,6 +80,24 @@ class LunarCalculator:
         
         self.moon.compute(observer)
         self.sun.compute(observer)
+
+        # Retrograde Check for major planets affecting Earthly Maya
+        planets_to_check = {
+            "Mercury": ephem.Mercury(),
+            "Venus": ephem.Venus(),
+            "Mars": ephem.Mars(),
+            "Jupiter": ephem.Jupiter(),
+            "Saturn": ephem.Saturn()
+        }
+        retrogrades = []
+        for name, p_obj in planets_to_check.items():
+            if self._is_retrograde(p_obj, observer.date):
+                retrogrades.append(name)
+        
+        retrograde_alert = None
+        if retrogrades:
+            pl_str = ", ".join(retrogrades)
+            retrograde_alert = f"🔮 **RETROGRADE ACTIVE:** [{pl_str}] are traversing backwards in the Maya 3D plane. Re-evaluate, reflect, and avoid rushing in these domains."
         
         # Calculate Phase (0 to 1)
         phase = self.moon.phase / 100.0  # Percentage of illumination
@@ -141,7 +179,8 @@ class LunarCalculator:
             "tithi_number": tithi_number,
             "tithi_paksha": paksha,
             "tithi_event": tithi_event,
-            "eclipse_alert": eclipse_alert
+            "eclipse_alert": eclipse_alert,
+            "retrograde_alert": retrograde_alert
         }
 
 lunar_calc = LunarCalculator()

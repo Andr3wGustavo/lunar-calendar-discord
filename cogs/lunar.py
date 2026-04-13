@@ -45,6 +45,8 @@ class LunarCog(commands.Cog):
              val_spiritual += f"\n\n{data['tithi_event']}"
         if data['eclipse_alert']:
              val_spiritual += f"\n\n{data['eclipse_alert']}"
+        if data['retrograde_alert']:
+             val_spiritual += f"\n\n{data['retrograde_alert']}"
 
         embed.add_field(
             name="Mystic Yogi Alignment",
