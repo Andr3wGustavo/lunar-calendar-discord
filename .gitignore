@@ -1,0 +1,5 @@
+venv/
+lunar_db.sqlite
+.env
+__pycache__/
+*.pyc
