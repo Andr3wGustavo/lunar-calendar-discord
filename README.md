@@ -25,6 +25,7 @@ Driven by the Python `ephem` library, the bot calculates orbital mechanics exact
 ### 🧘‍♂️ 2. The Mystic Yogi Matrix (Jyotish / Nakshatras)
 Calculates the Moon's sidereal position to deliver ancient Vedic psychological algorithms:
 - **Tropical Zodiac Position**: Understand the current western archetypal resonance.
+- **Vedic Tithis (Lunar Days)**: Divides the cycle into 30 specific days. Automatically triggers high-voltage **Ekadashi**, **Purnima**, and **Amavasya** alerts.
 - **The 27 Nakshatras (Lunar Mansions)**: The most profound yogic system of tracking the Moon's subtle emotional influence. Each mansion carries unique energy (e.g., *Ashwini* for healing, *Ardra* for emotional destruction, *Pushya* for nourishment).
 - **Spiritual Alignment Messages**: Every drop translates the cosmic weather into actionable inner-wisdom.
 
@@ -39,7 +40,11 @@ Zero tedious commands. Server administrators utilize Discord Slash Commands to m
 ### 📡 5. Automated Daily Matrix Delivery
 A background loop (Task) automatically awakens every day precisely at `12:00 PM UTC` to broadcast a detailed embed containing the status of the Maya 3D plane directly into your chosen guild channel.
 
-### 🌙 6. Instant Oracle Query (`/moon` & `/nakshatra`)
+### 🌙 6. Eclipse Detection (Rahu & Ketu Axes)
+- Integrates node calculation to detect when the Moon approaches the Ecliptic latitude orbital 0° during syzygy. 
+- Fires **Solar** and **Lunar** Eclipse ORB alerts precisely when the Moon gets swallowed by the karmic nodes (Rahu & Ketu).
+
+### 🔮 7. Instant Oracle Query (`/moon` & `/nakshatra`)
 - `/moon`: An instant snapshot of the celestial orbit sent immediately to chat.
 - `/nakshatra [name]`: A mystical encyclopedia built-in. Type any of the 27 lunar mansions and receive its ancient blueprint.
 
@@ -70,16 +75,13 @@ Even a perfect system can evolve. Here are highly recommended implementations to
    - Allow users to register their birth date/time/location.
    - The bot evaluates *Chandra Ashtama* (Moon transit over 8th house) or their *Lunar Return*, sending DMs to warn about high-stress days or high-manifestation periods.
 
-2. **Eclipse & Retrograde Alarms**
-   - Implement astronomical triggers when the Lunar Nodes (Rahu/Ketu) intersect the Sun/Moon plane, generating localized Solar and Lunar Eclipses. Send "Cosmic Shielding / Extreme Energy" warnings.
+2. **Retrograde Planet Detectors**
+   - Implement astronomical triggers when major planets (Mercury, Saturn, etc.) shift orbital direction relative to Earth, sending collective energetic warnings.
 
-3. **Vedic Tithis (Lunar Days Tracker)**
-   - Divide the month into 30 *Tithis* (e.g., *Ekadashi*, which is crucial for fasting in the yogic tradition) to recommend specific physical and spiritual diet habits.
-
-4. **Visual NASA Image Embedding**
+3. **Visual NASA Image Embedding**
    - Hook into a planetary API to generate and send visually accurate depictions (or topological maps) of the Moon's current state on the daily drop embed.
    
-5. **Dynamic Timezone Scaling**
+4. **Dynamic Timezone Scaling**
    - Extend the SQLite schema to allow guilds to configure their specific timezone, delivering the daily lunar report exactly at Noon (or midnight) local time, instead of just universal UTC.
 
 ---

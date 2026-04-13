@@ -115,6 +115,18 @@ class LunarCalculator:
         elif tithi_number == 30:
             tithi_event = "🌑 **AMAVASYA ACTIVATED:** Absolute dark moon. Powerful for ancestral healing and quiet introspection."
 
+        # Rahu / Ketu (Lunar Nodes & Eclipse Detection)
+        # In the Maya 3D plane, an eclipse happens when Moon's ecliptic latitude is close to 0 at New/Full moons.
+        moon_ecl_lat = math.degrees(ephem.Ecliptic(self.moon).lat)
+        eclipse_alert = None
+        if abs(moon_ecl_lat) < 1.5:
+            if tithi_number == 15:
+                eclipse_alert = "🔴 **LUNAR ECLIPSE ORB (RAHU/KETU AXIS):** The Moon is crossing the nodes during Purnima. Intense karmic clearing and emotional shadow work."
+            elif tithi_number == 30 or tithi_number == 1:
+                eclipse_alert = "🌑 **SOLAR ECLIPSE ORB (RAHU/KETU AXIS):** The New Moon aligns perfectly to obscure the Sun. Massive reality shifts and fated resets."
+            else:
+                eclipse_alert = "🌀 **NODAL ALIGNMENT:** The Moon is crossing the Ecliptic plane today (Entering Rahu/Ketu Domain). Fated encounters and timeline shifting."
+
         return {
             "date": date.strftime("%Y-%m-%d %H:%M:%S UTC"),
             "illumination": round(phase * 100, 2),
@@ -128,7 +140,8 @@ class LunarCalculator:
             "angle_diff": round(angle_diff, 2),
             "tithi_number": tithi_number,
             "tithi_paksha": paksha,
-            "tithi_event": tithi_event
+            "tithi_event": tithi_event,
+            "eclipse_alert": eclipse_alert
         }
 
 lunar_calc = LunarCalculator()
