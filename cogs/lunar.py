@@ -36,13 +36,17 @@ class LunarCog(commands.Cog):
 
         embed.add_field(
             name="Spiritual Geometry (Maya 3D)", 
-            value=f"Earth Distance: {data['distance_km']} km\nSun-Moon Angle: {data['angle_diff']}°",
+            value=f"Earth Distance: {data['distance_km']} km\nSun-Moon Angle: {data['angle_diff']}°\nVedic Cycle: {data['tithi_paksha']} (Tithi {data['tithi_number']})",
             inline=False
         )
 
+        val_spiritual = f"*{data['spiritual_message']}*"
+        if data['tithi_event']:
+             val_spiritual += f"\n\n{data['tithi_event']}"
+
         embed.add_field(
             name="Mystic Yogi Alignment",
-            value=f"*{data['spiritual_message']}*",
+            value=val_spiritual,
             inline=False
         )
 

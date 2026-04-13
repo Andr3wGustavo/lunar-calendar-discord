@@ -101,6 +101,20 @@ class LunarCalculator:
         elif angle_diff < 348: phase_name = "Waning Crescent"
         else: phase_name = "New Moon"
 
+        # Vedic Tithi Calculation (Each Tithi is exactly 12 degrees of Moon-Sun phase difference)
+        tithi_number = int((angle_diff % 360) / 12) + 1
+        paksha = "Shukla Paksha (Waxing Bright)" if is_waxing else "Krishna Paksha (Waning Dark)"
+        tithi_name = f"Tithi {tithi_number}"
+        
+        # Ekadashi check (11th Tithi is spiritually critical for fasting and meditation in yogic lore)
+        tithi_event = None
+        if tithi_number == 11 or tithi_number == 26:
+            tithi_event = "⚠️ **EKADASHI ACTIVATED:** Extremely potent window for spiritual fasting and deep meditation."
+        elif tithi_number == 15:
+            tithi_event = "🌕 **PURNIMA ACTIVATED:** Peak illumination. Emotional tides are highest. Celebrate and manifest."
+        elif tithi_number == 30:
+            tithi_event = "🌑 **AMAVASYA ACTIVATED:** Absolute dark moon. Powerful for ancestral healing and quiet introspection."
+
         return {
             "date": date.strftime("%Y-%m-%d %H:%M:%S UTC"),
             "illumination": round(phase * 100, 2),
@@ -111,7 +125,10 @@ class LunarCalculator:
             "spiritual_message": self.nakshatra_meanings[nakshatra_name],
             "distance_au": self.moon.earth_distance,
             "distance_km": round(self.moon.earth_distance * 149597870.7, 2),
-            "angle_diff": round(angle_diff, 2)
+            "angle_diff": round(angle_diff, 2),
+            "tithi_number": tithi_number,
+            "tithi_paksha": paksha,
+            "tithi_event": tithi_event
         }
 
 lunar_calc = LunarCalculator()
